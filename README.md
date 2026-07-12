@@ -310,11 +310,11 @@ Response
 
 GitHub
 
-https://github.com/YOUR_USERNAME
+https://github.com/sharad0111
 
 LinkedIn
 
-https://linkedin.com/in/YOUR_LINKEDIN
+https://www.linkedin.com/in/sharad-pareek-897310209/
 
 ---
 
