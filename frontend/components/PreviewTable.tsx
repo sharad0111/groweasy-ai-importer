@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import { Search, Download, ArrowUpDown } from "lucide-react";
 
 interface Props {
-    data: Record<string, any>[];
+  data: Record<string, any>[];
 }
 
 export default function PreviewTable({ data }: Props) {
@@ -42,7 +42,6 @@ export default function PreviewTable({ data }: Props) {
   }, [data, search, sortColumn, ascending]);
 
   const pageSize = 10;
-
   const totalPages = Math.ceil(filteredData.length / pageSize);
 
   const currentRows = filteredData.slice(
@@ -77,17 +76,21 @@ export default function PreviewTable({ data }: Props) {
   return (
     <div className="mt-8">
 
+      <h2 className="text-3xl font-bold mb-6">
+        CSV Preview
+      </h2>
+
       <div className="flex flex-col md:flex-row justify-between gap-4 mb-4">
 
         <div className="relative w-full md:w-80">
 
           <Search
             size={18}
-            className="absolute left-3 top-3 text-gray-500"
+            className="absolute left-3 top-3 text-muted-foreground"
           />
 
           <input
-            className="border rounded-lg w-full pl-10 py-2"
+            className="w-full rounded-lg border border-border bg-background text-foreground pl-10 py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary"
             placeholder="Search..."
             value={search}
             onChange={(e) => {
@@ -100,20 +103,19 @@ export default function PreviewTable({ data }: Props) {
 
         <button
           onClick={downloadCSV}
-          className="flex items-center gap-2 bg-green-600 text-white px-4 py-2 rounded-lg"
+          className="flex items-center gap-2 rounded-lg bg-green-600 px-4 py-2 text-white hover:bg-green-700 transition"
         >
           <Download size={18} />
-
           Export CSV
         </button>
 
       </div>
 
-      <div className="overflow-auto border rounded-xl max-h-[550px]">
+      <div className="overflow-auto rounded-xl border border-border bg-card max-h-[550px] shadow">
 
-        <table className="min-w-full">
+        <table className="min-w-full text-sm">
 
-          <thead className="sticky top-0 bg-gray-100 z-10">
+          <thead className="sticky top-0 bg-muted z-10">
 
             <tr>
 
@@ -129,7 +131,7 @@ export default function PreviewTable({ data }: Props) {
                       setAscending(true);
                     }
                   }}
-                  className="cursor-pointer border p-3 text-left whitespace-nowrap"
+                  className="cursor-pointer border-b border-border px-4 py-3 text-left whitespace-nowrap font-semibold"
                 >
                   <div className="flex items-center gap-2">
 
@@ -153,14 +155,14 @@ export default function PreviewTable({ data }: Props) {
 
               <tr
                 key={index}
-                className="odd:bg-white even:bg-gray-50 hover:bg-blue-50 transition"
+                className="border-b border-border hover:bg-muted/50 transition"
               >
 
                 {columns.map((col) => (
 
                   <td
                     key={col}
-                    className="border p-2 whitespace-nowrap"
+                    className="px-4 py-3 whitespace-nowrap"
                   >
                     {String(row[col] ?? "")}
                   </td>
@@ -177,26 +179,24 @@ export default function PreviewTable({ data }: Props) {
 
       </div>
 
-      <div className="flex justify-between items-center mt-4">
+      <div className="flex justify-between items-center mt-6">
 
         <button
           disabled={page === 1}
           onClick={() => setPage(page - 1)}
-          className="px-4 py-2 border rounded disabled:opacity-50"
+          className="rounded-lg border border-border bg-card px-4 py-2 disabled:opacity-40 hover:bg-muted transition"
         >
           Previous
         </button>
 
-        <span>
-
+        <span className="font-medium">
           Page {page} of {totalPages}
-
         </span>
 
         <button
           disabled={page === totalPages}
           onClick={() => setPage(page + 1)}
-          className="px-4 py-2 border rounded disabled:opacity-50"
+          className="rounded-lg border border-border bg-card px-4 py-2 disabled:opacity-40 hover:bg-muted transition"
         >
           Next
         </button>

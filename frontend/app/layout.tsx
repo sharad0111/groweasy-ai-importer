@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { Toaster } from "sonner";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const jetbrainsMono = JetBrains_Mono({subsets:['latin'],variable:'--font-mono'});
 
@@ -30,11 +31,29 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
-      className={cn("h-full", "antialiased", geistSans.variable, geistMono.variable, inter.variable, "font-mono", jetbrainsMono.variable)}
-    >
-      <body className="min-h-full flex flex-col">{children}
-      <Toaster richColors position="top-right" /></body>
+    lang="en"
+    suppressHydrationWarning
+    className={cn(
+      "h-full",
+      "antialiased",
+      geistSans.variable,
+      geistMono.variable,
+      inter.variable,
+      "font-mono",
+      jetbrainsMono.variable
+    )}
+  >
+<body className="min-h-full flex flex-col">
+  <ThemeProvider
+    attribute="class"
+    defaultTheme="system"
+    enableSystem
+    disableTransitionOnChange
+  >
+    {children}
+    <Toaster richColors position="top-right" />
+  </ThemeProvider>
+</body>
     </html>
   );
 }

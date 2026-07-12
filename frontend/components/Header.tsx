@@ -1,8 +1,11 @@
+"use client";
+
 import { DatabaseZap } from "lucide-react";
+import ThemeToggle from "./ThemeToggle";
 
 export default function Header() {
   return (
-    <div className="mb-10">
+    <div className="mb-10 flex items-center justify-between">
 
       <div className="flex items-center gap-4">
 
@@ -18,13 +21,15 @@ export default function Header() {
             GrowEasy AI Importer
           </h1>
 
-          <p className="text-gray-500 mt-1">
+          <p className="text-muted-foreground mt-1">
             AI Powered CRM Migration Tool
           </p>
 
         </div>
 
       </div>
+
+      <ThemeToggle />
 
     </div>
   );
